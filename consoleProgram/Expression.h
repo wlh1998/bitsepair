@@ -9,10 +9,10 @@ private:
 	
 
 	//true 使用分数表示 false 使用小数表示。
-	static bool fractionSerring;
+	static bool fractionSetting;
 	
 	//最大数字
-	static const int maxNumber = 10;
+	static const int maxNumber = 100;
 	//运算总数。
 	static const int opNumber = 8;
 	//题目字符串

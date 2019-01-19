@@ -114,9 +114,7 @@ int Expression::infixToPostfix(){
 	processChar('#');
 	return 0;
 }
-void tem(Expression obj) {
 
-}
 // true 相同
 bool Expression::compare(Expression obj) {
 
@@ -275,7 +273,9 @@ bool Expression::compare(Expression obj) {
 			default:
 				break;
 			}
-
+		}
+		else {
+			return false;
 		}
 		i++;
 		j++;
@@ -372,12 +372,17 @@ std::string Expression::randExpression()
 		}
 		problemExpression.append(1,op[m]);
 		//限制乘方的指数
-		if (m == 7)
+		if (op[m] == '^')
 		{
 			problemExpression.append(to_string(rand() % 3));
 		}
+		else if (op[m] == '/') {
+			problemExpression.append(to_string(rand()%(maxNumber-1)+1));
+		}
 		else
-		problemExpression.append(to_string(rand()%maxNumber));
+		{
+			problemExpression.append(to_string(rand() % maxNumber));
+		}
 	}
 
 	return problemExpression;
