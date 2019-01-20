@@ -66,7 +66,7 @@
             // label_djs
             // 
             this.label_djs.AutoSize = true;
-            this.label_djs.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_djs.BackColor = System.Drawing.Color.White;
             this.label_djs.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_djs.Location = new System.Drawing.Point(69, 47);
             this.label_djs.Name = "label_djs";
@@ -77,7 +77,7 @@
             // label_time
             // 
             this.label_time.AutoSize = true;
-            this.label_time.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_time.BackColor = System.Drawing.Color.White;
             this.label_time.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_time.Location = new System.Drawing.Point(154, 47);
             this.label_time.Name = "label_time";
@@ -93,7 +93,7 @@
             // label_timu
             // 
             this.label_timu.AutoSize = true;
-            this.label_timu.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_timu.BackColor = System.Drawing.Color.White;
             this.label_timu.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_timu.Location = new System.Drawing.Point(69, 96);
             this.label_timu.Name = "label_timu";
@@ -104,7 +104,7 @@
             // label_question
             // 
             this.label_question.AutoSize = true;
-            this.label_question.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_question.BackColor = System.Drawing.Color.White;
             this.label_question.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_question.Location = new System.Drawing.Point(151, 96);
             this.label_question.Name = "label_question";
@@ -115,7 +115,7 @@
             // label_second
             // 
             this.label_second.AutoSize = true;
-            this.label_second.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_second.BackColor = System.Drawing.Color.White;
             this.label_second.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_second.Location = new System.Drawing.Point(194, 47);
             this.label_second.Name = "label_second";
@@ -126,7 +126,7 @@
             // label_daan
             // 
             this.label_daan.AutoSize = true;
-            this.label_daan.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_daan.BackColor = System.Drawing.Color.White;
             this.label_daan.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_daan.Location = new System.Drawing.Point(69, 141);
             this.label_daan.Name = "label_daan";
@@ -171,7 +171,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(69, 196);
             this.label1.Name = "label1";
@@ -182,7 +182,7 @@
             // label_right
             // 
             this.label_right.AutoSize = true;
-            this.label_right.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_right.BackColor = System.Drawing.Color.White;
             this.label_right.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_right.Location = new System.Drawing.Point(211, 196);
             this.label_right.Name = "label_right";
@@ -193,7 +193,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(239, 196);
             this.label3.Name = "label3";
@@ -204,7 +204,7 @@
             // label_sum
             // 
             this.label_sum.AutoSize = true;
-            this.label_sum.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label_sum.BackColor = System.Drawing.Color.White;
             this.label_sum.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_sum.Location = new System.Drawing.Point(267, 196);
             this.label_sum.Name = "label_sum";

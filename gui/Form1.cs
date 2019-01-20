@@ -22,7 +22,7 @@ namespace 四则运算1
         {
             InitializeComponent();
         }
-        public static void RunCmd(string cmd, out string output)
+        public static void RunCmd(string cmd, out string output)//命令行调用函数
         {
             cmd = cmd.Trim().TrimEnd('&') + "&exit";//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态
             using (System.Diagnostics.Process p = new System.Diagnostics.Process())
@@ -46,23 +46,27 @@ namespace 四则运算1
             }
         }
    
-    private void button_pause_Click(object sender, EventArgs e)
+    private void button_pause_Click(object sender, EventArgs e)//暂停按钮
         {
-            if(button_pause.Text=="暂停")
+            if(flag==1)
             {
-                timer1.Stop();
-                button_pause.Text = "继续";
-                label_question.Text = "点击开始或继续按钮以继续";
+                if (button_pause.Text == "暂停")
+                {
+                    timer1.Stop();
+                    button_pause.Text = "继续";
+                    label_question.Text = "点击开始或继续按钮以继续";
+                }
+                else
+                {
+                    timer1.Start();
+                    button_pause.Text = "暂停";
+                    label_question.Text = line_q;
+                }
             }
-            else
-            {
-                timer1.Start();
-                button_pause.Text = "暂停";
-                label_question.Text = line_q;
-            }
+            
         }
 
-        private void btn_start_Click(object sender, EventArgs e)
+        private void btn_start_Click(object sender, EventArgs e)//开始按钮
         {
             if (button_pause.Text == "暂停"&&flag==0)
 
@@ -73,6 +77,7 @@ namespace 四则运算1
                 if ((line_q = sr.ReadLine()) != null)
                 {
                     label_question.Text = line_q;
+                    timer1.Start();
                 }
                 else
                 {
@@ -91,7 +96,7 @@ namespace 四则运算1
             }
             
         }
-        private void button_confirm_Click(object sender, EventArgs e)
+        private void button_confirm_Click(object sender, EventArgs e)//确定按钮
         {
             if(seconds==0||textBox_answer.Text!="")
             {
@@ -142,7 +147,7 @@ namespace 四则运算1
             
             
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)//计时器
         {
             seconds = (seconds == 0) ? 20 : seconds - 1;
             label_time.Text = seconds.ToString();
