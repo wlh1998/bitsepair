@@ -1,5 +1,10 @@
 # bitsepair  
 bit cs se pair homework  
+  
+博客地址：  
+命令行：https://blog.csdn.net/wlh1998  
+gui部分：https://blog.csdn.net/qq_42174315/article/details/86537752  
+  
 我们选择的是项目2：四则运算题目生成。  
 实现了控制台和gui两种方式。  
 在consoleProgram中为控制台方式的源代码。  
