@@ -7,7 +7,7 @@
 #include <ctime>
 using namespace std;
 //
-//#ø™ ºΩ· ¯±Íº«
+//#ÂºÄÂßãÁªìÊùüÊ†áËÆ∞
 bool Expression::powerSetting = true;
 const char Expression::op[Expression::opNumber] = 
 	{ '+','-','*','/','(',')','#','^' };
@@ -31,12 +31,17 @@ void Expression::init() {
 	}
 	postfixExpression = "";
 	infixToPostfix();
-	calculate();
+	while (calculate()) {
+		cout << "wrong!!!!!!!!!!!!!!!" << endl;
+		cout << problemExpression << endl;
+		randExpression();
+		init();
+	}
 }
 //1 first > second
 //2 first = second
 //-1 first < second
-//ªÒ»°¡Ω∏ˆ≤Ÿ◊˜∑˚µƒ”≈œ»º∂°£
+//Ëé∑Âèñ‰∏§‰∏™Êìç‰ΩúÁ¨¶ÁöÑ‰ºòÂÖàÁ∫ß„ÄÇ
 int Expression::cmp(char first, char second) {
 	int int_first = 0,
 		int_second = 0;
@@ -58,7 +63,7 @@ int Expression::processOperator(char ch) {
 	char topOperator = stack_op.top();
 	int cmpans = cmp(topOperator, ch);
 	if (cmpans == -1) {
-		//–¬‘ÀÀ„∑˚”≈œ»º∂∏ﬂ
+		//Êñ∞ËøêÁÆóÁ¨¶‰ºòÂÖàÁ∫ßÈ´ò
 		stack_op.push(ch);
 		return 0;
 	}
@@ -67,7 +72,7 @@ int Expression::processOperator(char ch) {
 		stack_op.pop();
 		return 0;
 	}
-	//œ»Ω´’ª∂•‘™ÀÿµØ≥ˆ£¨‘Ÿ¥Œ≥¢ ‘
+	//ÂÖàÂ∞ÜÊ†àÈ°∂ÂÖÉÁ¥†ÂºπÂá∫ÔºåÂÜçÊ¨°Â∞ùËØï
 	if (cmpans == 1)
 	{
 		postfixExpression.append(1,topOperator);
@@ -82,8 +87,8 @@ int Expression::processOperator(char ch) {
 }
 
 int Expression::infixToPostfix(){
-	//‘ÀÀ„∑˚£¨µ˜”√processOperator°£
-	// ˝◊÷£¨»”»ÎΩ·π˚°£
+	//ËøêÁÆóÁ¨¶ÔºåË∞ÉÁî®processOperator„ÄÇ
+	//Êï∞Â≠óÔºåÊâîÂÖ•ÁªìÊûú„ÄÇ
 	stack_op.push('#');
 	for (int i = 0; i < problemExpression.length(); i++)
 	{
@@ -115,7 +120,7 @@ int Expression::infixToPostfix(){
 	return 0;
 }
 
-// true œ‡Õ¨
+// true Áõ∏Âêå
 bool Expression::compare(Expression obj) {
 
 	if (!(ans == obj.ans))
@@ -126,7 +131,7 @@ bool Expression::compare(Expression obj) {
 	{
 		return true;
 	}
-	//≤Èø¥∑˚∫≈–Ú¡– «∑Òœ‡Õ¨
+	//Êü•ÁúãÁ¨¶Âè∑Â∫èÂàóÊòØÂê¶Áõ∏Âêå
 
 	int i = 0,
 		j = 0;
@@ -286,7 +291,7 @@ bool Expression::compare(Expression obj) {
 	}
 	return true;
 }
-//∏˘æ›∫Û◊∫£¨º∆À„Ω·π˚
+//Ê†πÊçÆÂêéÁºÄÔºåËÆ°ÁÆóÁªìÊûú
 int Expression::calculate()
 {
 	Number num1, num2, num3;
@@ -334,6 +339,10 @@ int Expression::calculate()
 			stack_opnum.push(num1 * num2);
 			break;
 		case '/':
+			if (num2 == 0)
+			{
+				return 1;
+			}
 			stack_opnum.push(num1 / num2);
 			break;
 		case '^':
@@ -350,6 +359,7 @@ int Expression::calculate()
 		}
 	}
 	ans = stack_opnum.top();	
+	return 0;
 }
 Expression::Expression()
 {
@@ -358,8 +368,9 @@ Expression::Expression()
 }
 std::string Expression::randExpression()
 {
+	static int testnum = 0;
 	//srand(int(time(0)));
-	
+
 	problemExpression = to_string(rand()%maxNumber);	
 	int n = rand() % 10 + 1;
 
@@ -371,7 +382,7 @@ std::string Expression::randExpression()
 			m = rand() % opNumber;
 		}
 		problemExpression.append(1,op[m]);
-		//œﬁ÷∆≥À∑Ωµƒ÷∏ ˝
+		//ÈôêÂà∂‰πòÊñπÁöÑÊåáÊï∞
 		if (op[m] == '^')
 		{
 			problemExpression.append(to_string(rand() % 3));
@@ -384,7 +395,53 @@ std::string Expression::randExpression()
 			problemExpression.append(to_string(rand() % maxNumber));
 		}
 	}
-
+	int bracketNumber = rand() % 3;
+	for (int i = 0; i < bracketNumber; i++)
+	{
+		int left = rand() % n;
+		int position = 0;
+		for (int j = 0; j < left; j++)
+		{
+			while (problemExpression[position] <= '9' && problemExpression[position] >= '0'){
+				position++;
+			}
+			while (problemExpression[position] > '9' || problemExpression[position] < '0') {
+				position++;
+			}
+		}
+		if (position > 0 && problemExpression[position-1] == '^')
+		{
+			continue;
+		}
+		problemExpression.insert(position,1,'(');
+		
+		int right;
+		if (n-left == 1)
+		{
+			right = 2;
+		}
+		else {
+			right = rand() % (n - left) + 2;
+		}
+		//right+=1;
+		for (int j = 0; j < right; j++)
+		{
+			while (problemExpression[position] > '9' || problemExpression[position] < '0') {
+				position++;
+			}
+			while (problemExpression[position] <= '9' && problemExpression[position] >= '0') {
+				position++;
+			}
+		}
+		problemExpression.insert(position, 1, ')');
+	}
+	if (!testnum % 100)
+	{
+		cout << testnum << endl;
+	}
+	//cout << testnum << ":"<<endl;
+	//cout << problemExpression << endl;
+	testnum++;
 	return problemExpression;
 }
 Expression::Expression(std::string expression)
@@ -400,7 +457,7 @@ std::string Expression::getProblemExpression()
 	exp = problemExpression;
 	exp.append(" = ?");
 	
-	std::cout <<"∫Û◊∫" << postfixExpression << endl;
+	std::cout <<"ÂêéÁºÄ" << postfixExpression << endl;
 	return exp;
 	*/
 	if (powerSetting)
