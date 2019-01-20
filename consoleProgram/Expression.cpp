@@ -7,7 +7,7 @@
 #include <ctime>
 using namespace std;
 //
-//#å¼€å§‹ç»“æŸæ ‡è®°
+//#¿ªÊ¼½áÊø±ê¼Ç
 bool Expression::powerSetting = true;
 const char Expression::op[Expression::opNumber] = 
 	{ '+','-','*','/','(',')','#','^' };
@@ -22,6 +22,7 @@ const int Expression::opcmp[Expression::opNumber][Expression::opNumber]
 { -1,-1,-1,-1,-1, 2, 0,-1 },
 { 1, 1, 1, 1,-1, 1, 1,-1 }
 };
+
 void Expression::init() {
 	while (!stack_opnum.empty()) {
 		stack_opnum.pop();
@@ -31,7 +32,8 @@ void Expression::init() {
 	}
 	postfixExpression = "";
 	infixToPostfix();
-	while (calculate()) {
+	//Èç¹û¼ÆËãÊ±·¢ÏÖÎÊÌâ£¬ÔòÖØĞÂÉú³É
+	if (calculate()) {
 		cout << "wrong!!!!!!!!!!!!!!!" << endl;
 		cout << problemExpression << endl;
 		randExpression();
@@ -41,7 +43,7 @@ void Expression::init() {
 //1 first > second
 //2 first = second
 //-1 first < second
-//è·å–ä¸¤ä¸ªæ“ä½œç¬¦çš„ä¼˜å…ˆçº§ã€‚
+//»ñÈ¡Á½¸ö²Ù×÷·ûµÄÓÅÏÈ¼¶¡£
 int Expression::cmp(char first, char second) {
 	int int_first = 0,
 		int_second = 0;
@@ -59,20 +61,22 @@ int Expression::cmp(char first, char second) {
 int Expression::processChar(char ch) {
 	return processOperator(ch);
 }
+
 int Expression::processOperator(char ch) {
 	char topOperator = stack_op.top();
 	int cmpans = cmp(topOperator, ch);
 	if (cmpans == -1) {
-		//æ–°è¿ç®—ç¬¦ä¼˜å…ˆçº§é«˜
+		//ĞÂÔËËã·ûÓÅÏÈ¼¶¸ß,Ö±½ÓÈëÕ»
 		stack_op.push(ch);
 		return 0;
 	}
+	//À¨ºÅÏàÓö£¬ÏûÈ¥¡£
 	if (cmpans == 0)
 	{
 		stack_op.pop();
 		return 0;
 	}
-	//å…ˆå°†æ ˆé¡¶å…ƒç´ å¼¹å‡ºï¼Œå†æ¬¡å°è¯•
+	//ĞÂÔËËã·ûÓÅÏÈ¼¶µÍ£¬ÏÈ½«Õ»¶¥ÔªËØµ¯³ö£¬ÔÙ´Î³¢ÊÔ
 	if (cmpans == 1)
 	{
 		postfixExpression.append(1,topOperator);
@@ -87,8 +91,8 @@ int Expression::processOperator(char ch) {
 }
 
 int Expression::infixToPostfix(){
-	//è¿ç®—ç¬¦ï¼Œè°ƒç”¨processOperatorã€‚
-	//æ•°å­—ï¼Œæ‰”å…¥ç»“æœã€‚
+	//ÔËËã·û£¬µ÷ÓÃprocessOperator¡£
+	
 	stack_op.push('#');
 	for (int i = 0; i < problemExpression.length(); i++)
 	{
@@ -104,6 +108,7 @@ int Expression::infixToPostfix(){
 					break;
 				}
 			}
+			//Êı×Ö£¬ÈÓÈë½á¹û¡£
 			if (!flag)
 			{
 				do
@@ -120,19 +125,20 @@ int Expression::infixToPostfix(){
 	return 0;
 }
 
-// true ç›¸åŒ
+// true ÏàÍ¬
 bool Expression::compare(Expression obj) {
-
+	//½á¹û²»Í¬£¬¿Ï¶¨²»Í¬
 	if (!(ans == obj.ans))
 	{
 		return false;
 	}
+	//ºó×º±í´ïÊ½ÏàÍ¬£¬¿Ï¶¨ÏàÍ¬
 	if (obj.postfixExpression == postfixExpression)
 	{
 		return true;
 	}
-	//æŸ¥çœ‹ç¬¦å·åºåˆ—æ˜¯å¦ç›¸åŒ
 
+	//²é¿´·ûºÅĞòÁĞÊÇ·ñÏàÍ¬
 	int i = 0,
 		j = 0;
 	int postLength = postfixExpression.length();
@@ -162,6 +168,7 @@ bool Expression::compare(Expression obj) {
 	i = 0;
 	j = 0;
 
+	//Á½±í´ïÊ½Í¬²½¼ÆËã¡£
 	while (!stack_opnum.empty())
 	{
 		stack_opnum.pop();
@@ -176,6 +183,7 @@ bool Expression::compare(Expression obj) {
 	j = 0;
 	while (i < postLength && j < postLength2 )
 	{
+		//µÚÒ»¸öÊ½×Ó¶ÁÖÁ²Ù×÷·û
 		while (postfixExpression[i] <= '9' && postfixExpression[i] >= '0')
 		{
 			num1 = postfixExpression[i] - '0';
@@ -192,7 +200,7 @@ bool Expression::compare(Expression obj) {
 				i++;
 			}
 		}
-
+		//µÚ¶ş¸öÊ½×Ó¶ÁÖÁ²Ù×÷·û
 		while (obj.postfixExpression[j] <= '9' && obj.postfixExpression[j] >= '0')
 		{
 			num1 = obj.postfixExpression[j] - '0';
@@ -221,7 +229,7 @@ bool Expression::compare(Expression obj) {
 		num21 = obj.stack_opnum.top();
 		obj.stack_opnum.pop();
 
-
+		//Èç¹ûÁ½ÊıÏàÍ¬£¬Ôò¼ÆËã²¢¼ÌĞø
 		if (num1 == num21 && num2 == num22)
 		{
 			switch (postfixExpression[i])
@@ -257,6 +265,7 @@ bool Expression::compare(Expression obj) {
 			}
 
 		}
+		//Èç¹ûÁ½ÊıÎ»ÖÃÏà·´£¬Ôò¼Ó·¨³Ë·¨¼ÌĞø
 		else if (num1 == num22 && num2 == num21)
 		{
 			switch (postfixExpression[i])
@@ -279,6 +288,7 @@ bool Expression::compare(Expression obj) {
 				break;
 			}
 		}
+		//ÆäËûÇé¿ö£¬·µ»Ø
 		else {
 			return false;
 		}
@@ -291,7 +301,7 @@ bool Expression::compare(Expression obj) {
 	}
 	return true;
 }
-//æ ¹æ®åç¼€ï¼Œè®¡ç®—ç»“æœ
+//¸ù¾İºó×º£¬¼ÆËã½á¹û
 int Expression::calculate()
 {
 	Number num1, num2, num3;
@@ -302,6 +312,7 @@ int Expression::calculate()
 		{
 			continue;
 		}
+		//¶ÁÈ¡Êı×Ö
 		if (postfixExpression[i] <='9' && postfixExpression[i] >='0')
 		{
 			num1 = postfixExpression[i] - '0';
@@ -326,7 +337,7 @@ int Expression::calculate()
 		}
 		num1 = stack_opnum.top();
 		stack_opnum.pop();
-
+		//¸ù¾İ²Ù×÷·û¼ÆËã
 		switch (postfixExpression[i])
 		{
 		case '+':
@@ -366,27 +377,31 @@ Expression::Expression()
 	randExpression();
 	init();
 }
+//Ëæ»úÉú³ÉÌâÄ¿
 std::string Expression::randExpression()
 {
 	static int testnum = 0;
 	//srand(int(time(0)));
-
+	//µÚÒ»¸ö²Ù×÷Êı
 	problemExpression = to_string(rand()%maxNumber);	
+	//²Ù×÷·û¸öÊı
 	int n = rand() % 10 + 1;
-
+	//Éú³Én¸ö²Ù×÷·û
 	for (int i = 0; i < n; i++)
 	{
+		//Èç¹ûÉú³É ()# ÈıÕßÖ®Ò»£¬ÖØĞÂËæ»ú
 		int m = rand() % opNumber;
 		while (m == 4 || m == 5 || m == 6)
 		{
 			m = rand() % opNumber;
 		}
 		problemExpression.append(1,op[m]);
-		//é™åˆ¶ä¹˜æ–¹çš„æŒ‡æ•°
+		//ÏŞÖÆ³Ë·½µÄÖ¸Êı
 		if (op[m] == '^')
 		{
 			problemExpression.append(to_string(rand() % 3));
 		}
+		//ÏŞÖÆ³ıÁã
 		else if (op[m] == '/') {
 			problemExpression.append(to_string(rand()%(maxNumber-1)+1));
 		}
@@ -395,6 +410,7 @@ std::string Expression::randExpression()
 			problemExpression.append(to_string(rand() % maxNumber));
 		}
 	}
+	//Ìí¼ÓÀ¨ºÅ
 	int bracketNumber = rand() % 3;
 	for (int i = 0; i < bracketNumber; i++)
 	{
@@ -416,6 +432,7 @@ std::string Expression::randExpression()
 		problemExpression.insert(position,1,'(');
 		
 		int right;
+		//±£Ö¤×óÓÒÀ¨ºÅÖ®¼ä¼ä¸ô£¬µ«²»Í¬À¨ºÅ×éÖ®¼äÎŞ·¨±£Ö¤¡£
 		if (n-left == 1)
 		{
 			right = 2;
@@ -457,7 +474,7 @@ std::string Expression::getProblemExpression()
 	exp = problemExpression;
 	exp.append(" = ?");
 	
-	std::cout <<"åç¼€" << postfixExpression << endl;
+	std::cout <<"ºó×º" << postfixExpression << endl;
 	return exp;
 	*/
 	if (powerSetting)

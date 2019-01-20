@@ -4,6 +4,7 @@
 
 int Number::maxFactor(int nr, int dr)
 {
+	//辗转相除法求最大公因子
 	int th = nr, tl = dr;
 	if (nr < dr)
 	{
@@ -123,6 +124,7 @@ int Number::getDenominator()
 
 void Number::fractionReduction()
 {
+	//分子为零，直接将分母置一。
 	if (numerator == 0)
 	{
 		denominator = 1;
@@ -141,6 +143,7 @@ Number::~Number()
 
 std::ostream & operator<<(std::ostream & out, const Number & obj)
 {
+	//输出时，若分母为1，则不显示
 	if (obj.denominator == 1)
 	{
 		out << obj.numerator;
